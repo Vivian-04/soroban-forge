@@ -222,9 +222,9 @@ fn last_revealer_can_withhold_nonce_and_alter_draw_eligibility() {
     let nonce_b = BytesN::from_array(&env, &[2_u8; 32]);
     let nonce_c = BytesN::from_array(&env, &[3_u8; 32]);
 
-    contract.enter(&alice, &commit(&env, &nonce_a));
-    contract.enter(&bob, &commit(&env, &nonce_b));
-    contract.enter(&carol, &commit(&env, &nonce_c));
+    contract.enter(&alice, &commit(&env, &alice, &nonce_a));
+    contract.enter(&bob, &commit(&env, &bob, &nonce_b));
+    contract.enter(&carol, &commit(&env, &carol, &nonce_c));
 
     // Move to reveal phase. Alice and Bob reveal.
     env.ledger().with_mut(|li| li.timestamp = commit_deadline);
